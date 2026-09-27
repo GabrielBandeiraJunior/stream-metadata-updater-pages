@@ -16,25 +16,67 @@
     O <strong>stream-metadata-updater</strong> é uma ferramenta pessoal que roda
     inteiramente no computador do próprio desenvolvedor/usuário — não existe
     servidor remoto, banco de dados externo ou serviço na nuvem envolvido.
+    Não há cadastro de usuários: é um script local usado por uma única pessoa,
+    o próprio desenvolvedor.
+  </p>
+
+  <h2>Quais dados o app acessa</h2>
+  <p>
+    Ao autorizar o app com sua conta Google (YouTube), ele solicita o escopo
+    <code>https://www.googleapis.com/auth/youtube</code>, que permite:
+  </p>
+  <ul>
+    <li>Consultar a transmissão ao vivo ativa do próprio canal do usuário
+      (<code>liveBroadcasts.list</code>);</li>
+    <li>Ler e atualizar o título, a descrição, as tags e a categoria do vídeo
+      associado a essa transmissão (<code>videos.list</code> /
+      <code>videos.update</code>).</li>
+  </ul>
+  <p>
+    O app não lê, acessa ou modifica nenhum outro dado da conta do Google do
+    usuário (sem acesso a e-mail, contatos, outros vídeos, comentários,
+    inscritos, mensagens ou qualquer informação fora do escopo acima). O
+    mesmo princípio de mínimo acesso vale para as integrações com Twitch
+    (escopo <code>channel:manage:broadcast</code>, só permite atualizar
+    título/categoria/tags do canal) e Kick (escopo <code>channel:write</code>,
+    mesma finalidade).
+  </p>
+
+  <h2>Onde os dados ficam armazenados</h2>
+  <p>
+    Os tokens de acesso e atualização (refresh tokens) obtidos via OAuth são
+    salvos <strong>apenas localmente</strong>, em um arquivo de texto no
+    computador do próprio usuário (<code>tokens.json</code>). Esse arquivo
+    nunca é enviado, sincronizado ou compartilhado com nenhum servidor,
+    serviço de nuvem ou terceiro — as únicas chamadas de rede que o app faz
+    são diretamente para as APIs oficiais da Twitch, da Kick e do Google
+    (YouTube), usando o token pra autenticar cada requisição.
   </p>
   <p>
-    O aplicativo se conecta às APIs da Twitch, Kick e YouTube usando OAuth,
-    exclusivamente para ler e atualizar o título, categoria e tags da live do
-    próprio usuário autenticado. Nenhum dado de terceiros é acessado, coletado
-    ou compartilhado.
+    Não há coleta de analytics, cookies, rastreamento de uso, telemetria ou
+    qualquer envio de dados para o desenvolvedor ou para qualquer outro
+    terceiro. O código-fonte completo do app é local e não faz upload de
+    nada além das chamadas às três APIs mencionadas.
   </p>
+
+  <h2>Compartilhamento com terceiros</h2>
   <p>
-    Os tokens de acesso obtidos via OAuth ficam armazenados apenas localmente,
-    em um arquivo no computador do usuário (<code>tokens.json</code>), e nunca
-    são transmitidos a nenhum outro serviço além das próprias APIs oficiais
-    das plataformas (Twitch, Kick, Google/YouTube).
+    Nenhum dado é vendido, alugado ou compartilhado com terceiros. As únicas
+    partes que recebem qualquer informação são as próprias plataformas
+    (Twitch, Kick, Google/YouTube), como parte normal do uso de suas APIs
+    oficiais para atualizar o canal do próprio usuário autenticado.
   </p>
+
+  <h2>Revogar acesso</h2>
   <p>
-    Como essa é uma ferramenta de uso estritamente pessoal (um único usuário,
-    o próprio desenvolvedor), não há coleta de dados de terceiros, cookies,
-    analytics ou qualquer forma de rastreamento.
+    O usuário pode revogar o acesso do app a qualquer momento diretamente nas
+    configurações de segurança da própria conta Google
+    (<a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>),
+    Twitch ou Kick.
   </p>
-  <p>Dúvidas: veja o contato no repositório do projeto no GitHub.</p>
+
+  <h2>Contato</h2>
+  <p>Dúvidas: <a href="mailto:gbrlbjor@gmail.com">gbrlbjor@gmail.com</a>.</p>
   <footer><a href="index.html">← voltar</a></footer>
 </body>
 </html>
